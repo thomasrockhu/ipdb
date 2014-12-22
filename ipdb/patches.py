@@ -29,9 +29,12 @@
 import thread
 
 # attempt to only disable history in multithreaded apps
-if thread._count() > 1:
-    try:
-        from IPython.core.history import HistoryManager
-        HistoryManager.enabled = False
-    except ImportError:
-        pass
+history_enabled = False
+# _count is not available in Python 2.6
+if hasattr(thread, '_count') and thread._count() == 1:
+    history_enabled = True
+try:
+    from IPython.core.history import HistoryManager
+    HistoryManager.enabled = history_enabled
+except ImportError:
+    pass
