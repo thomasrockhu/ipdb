@@ -26,8 +26,12 @@
 # IPython as needed. But no such possibility exists for the debugger, therefore
 # this patch.
 
-try:
-    from IPython.core.history import HistoryManager
-    HistoryManager.enabled = False
-except ImportError:
-    pass
+import thread
+
+# attempt to only disable history in multithreaded apps
+if thread._count() > 1:
+    try:
+        from IPython.core.history import HistoryManager
+        HistoryManager.enabled = False
+    except ImportError:
+        pass
