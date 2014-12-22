@@ -26,13 +26,19 @@
 # IPython as needed. But no such possibility exists for the debugger, therefore
 # this patch.
 
-import thread
 
 # attempt to only disable history in multithreaded apps
 history_enabled = False
-# _count is not available in Python 2.6
-if hasattr(thread, '_count') and thread._count() == 1:
-    history_enabled = True
+try:
+    import thread
+    # _count is not available in Python 2.6
+    if hasattr(thread, '_count') and thread._count() == 1:
+        history_enabled = True
+except ImportError:
+    import threading
+    if threading.active_count() == 1:
+        history_enabled = True
+
 try:
     from IPython.core.history import HistoryManager
     HistoryManager.enabled = history_enabled
