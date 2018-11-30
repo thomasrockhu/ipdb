@@ -3,6 +3,8 @@ IPython `pdb`
 
 .. image:: https://travis-ci.org/gotcha/ipdb.png?branch=master
   :target: https://travis-ci.org/gotcha/ipdb
+.. image:: https://img.shields.io/codecov/c/github/thomasrockhu/ipdb/master.svg?style=flat
+  :target: https://codecov.io/gh/thomasrockhu/ipdb?branch=master
 
 Use
 ---
@@ -66,6 +68,7 @@ You can also enclose code with the ``with`` statement to launch ipdb if an excep
    Using ``from future import print_function`` for Python 3 compat implies dropping Python 2.5 support.
    Use ``ipdb<=0.8`` with 2.5.
 
+
 Issues with ``stdout``
 ----------------------
 
@@ -122,3 +125,4 @@ instead of ``pdb``. (It does not depend on ``ipdb`` anymore).
 
 .. _ipdbplugin: http://pypi.python.org/pypi/ipdbplugin
 .. _nose: http://readthedocs.org/docs/nose
+
